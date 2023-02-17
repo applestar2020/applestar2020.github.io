@@ -2,11 +2,15 @@
 <html>
 <script type="text/javascript">
     function echo(str) {
-        console.log(str);
-        window.webkit.messageHandlers.testecho.postMessage(str);
+        // console.log(str);
+        // window.webkit.messageHandlers.testecho.postMessage(str);
+
+        WebViewJavascriptBridge.callHandler('colorClick',function(dataFromOC) {
+            alert("JS 调用了 OC 注册的 colorClick 方法");
+            document.getElementById("returnValue").value = dataFromOC;
+        })
 }
-    
-    
+
     function setupWebViewJavascriptBridge(callback) {
       if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
       if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
@@ -23,18 +27,19 @@
 
       bridge.registerHandler('JS Echo', function(data, responseCallback) {
         console.log("JS Echo called with:", data)
-        document.getElementById("demo").innerHTML = "From OC success!!"
+        
         responseCallback(data)
       })
       bridge.callHandler('ObjC Echo', {'key':'value'}, function responseCallback(responseData) {
         console.log("JS received response:", responseData)
       })
     })
-    
-    
+
 </script>
+
+
 <body>
-<p id="demo">Hello shenzhen!</p>
+<h2>这是一个HTML页面</h2>
 <input type="button" onClick="echo('toast clicked')" value="toast">
 <input type="button" onClick="echo('alert clicked')" value="Alert">
 </body>
