@@ -7,7 +7,7 @@
 
         WebViewJavascriptBridge.callHandler('colorClick',function(dataFromOC) {
             alert("JS 调用了 OC 注册的 colorClick 方法");
-            document.getElementById("demo").value = dataFromOC;
+            document.getElementById("demo").innerHTML = dataFromOC;
         })
 }
 
@@ -27,7 +27,7 @@
 
       bridge.registerHandler('JS Echo', function(data, responseCallback) {
         console.log("JS Echo called with:", data)
-        document.getElementById("demo").value = data;
+        document.getElementById("demo").innerHTML = data;
         responseCallback(data)
       })
       bridge.callHandler('ObjC Echo', {'key':'value'}, function responseCallback(responseData) {
