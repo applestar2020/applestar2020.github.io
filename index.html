@@ -27,7 +27,7 @@
 
       bridge.registerHandler('JS Echo', function(data, responseCallback) {
         console.log("JS Echo called with:", data)
-        
+        document.getElementById("demo").value = data;
         responseCallback(data)
       })
       bridge.callHandler('ObjC Echo', {'key':'value'}, function responseCallback(responseData) {
