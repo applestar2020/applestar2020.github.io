@@ -35,6 +35,7 @@
       /* Initialize your app here */
 
       bridge.registerHandler('JS Echo', function(data, responseCallback) {
+        data = window.btoa(data)
         console.log("JS Echo called with:", data)
         document.getElementById("demo").innerHTML = data;
 
