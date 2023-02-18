@@ -10,6 +10,10 @@
             document.getElementById("demo").innerHTML = dataFromOC;
         })
 }
+    function showImage() {
+      document.getElementById("demo").innerHTML = "showImage Clicked";
+      document.getElementById("imageid").src="/ykm/static/2aee70d3d005c220bc9e4c64ad8c7485.png";
+    }
 
     function setupWebViewJavascriptBridge(callback) {
       if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
@@ -42,6 +46,8 @@
 <p id="demo">Hello shenzhen!</p>
 <input type="button" onClick="echo('toast clicked')" value="toast">
 <input type="button" onClick="echo('alert clicked')" value="Alert">
+<img id="imageid" border="0" src="/ykm/static/yss.jpeg" alt="Pulpit rock" width="304" height="228">
+
 </body>
 
 </html>
