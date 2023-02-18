@@ -7,12 +7,17 @@
 
         WebViewJavascriptBridge.callHandler('colorClick',function(dataFromOC) {
             alert("JS 调用了 OC 注册的 colorClick 方法");
+            // img = <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
             document.getElementById("demo").innerHTML = dataFromOC;
         })
 }
     function showImage() {
       document.getElementById("demo").innerHTML = "showImage Clicked";
-      document.getElementById("imageid").src="/ykm/static/2aee70d3d005c220bc9e4c64ad8c7485.png";
+      data = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+      imgData = "data:image/png;base64," + data;
+      // document.getElementById("imageid").src="./ykm/static/2aee70d3d005c220bc9e4c64ad8c7485.png";\
+      document.getElementById("imageid").src= imgData;
+
     }
 
     function setupWebViewJavascriptBridge(callback) {
@@ -32,6 +37,9 @@
       bridge.registerHandler('JS Echo', function(data, responseCallback) {
         console.log("JS Echo called with:", data)
         document.getElementById("demo").innerHTML = data;
+
+        imgData = "data:image/png;base64," + data;
+        document.getElementById("imageid").src= imgData;
         responseCallback(data)
       })
       bridge.callHandler('ObjC Echo', {'key':'value'}, function responseCallback(responseData) {
@@ -45,9 +53,13 @@
 <body>
 <p id="demo">Hello shenzhen!</p>
 <input type="button" onClick="echo('toast clicked')" value="toast">
-<input type="button" onClick="echo('alert clicked')" value="Alert">
-<img id="imageid" border="0" src="/ykm/static/yss.jpeg" alt="Pulpit rock" width="304" height="228">
+<input type="button" onClick="showImage()" value="imageBTN">
+<br />
 
+<img id="imageid" border="0" src="./ykm/static/yss.jpeg" alt="Pulpit rock" width="304" height="228">
+
+
+<img id="imageid" border="0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Pulpit rock" width="304" height="228">
 </body>
 
 </html>
