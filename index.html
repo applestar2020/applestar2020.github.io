@@ -16,7 +16,7 @@
     </xmp>
 </p>
 <p>
-    <input type="text" id="text1" value="用户名1(username)"/>
+    <input type="text" id="text1" value="用户名2(username)"/>
 </p>
 <p>
     <input type="text" id="text2" value="password"/>
@@ -87,17 +87,17 @@
           document.documentElement.appendChild(WVJBIframe);
           setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
           
-            // if (window.WebViewJavascriptBridge && WebViewJavascriptBridge.inited) {
-            //     callback(WebViewJavascriptBridge)
-            // } else {
-            //     document.addEventListener(
-            //         'WebViewJavascriptBridgeReady'
-            //         , function() {
-            //             callback(WebViewJavascriptBridge)
-            //         },
-            //         false
-            //     );
-            // }
+            if (window.WebViewJavascriptBridge && WebViewJavascriptBridge.inited) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
         }
 
         connectWebViewJavascriptBridge(function(bridge) {
