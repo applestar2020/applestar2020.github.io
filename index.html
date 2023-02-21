@@ -33,7 +33,7 @@
     <input type="button" id="enter2" value="显示html" onclick="testDiv();"/>
 </p>
 <p>
-    <input type="file" value="打开文件"/>
+    <input type="file" value="打开文件1"/>
 </p>
 </body>
 <script>
@@ -120,6 +120,20 @@
                     responseCallback(responseData);
                 }
             });
+
+
+            bridge.registerHandler('JS Echo', function(data, responseCallback) {
+              data = window.btoa(data)
+              console.log("JS Echo called with:", data)
+              document.getElementById("show").innerHTML = data;
+
+              responseCallback(data)
+            })
+
+            bridge.callHandler('ObjC Echo', {'key':'value'}, function responseCallback(responseData) {
+              console.log("JS received response:", responseData)
+            })
+            
         })
 
 </script>
