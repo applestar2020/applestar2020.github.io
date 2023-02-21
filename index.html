@@ -11,12 +11,20 @@
             document.getElementById("demo").innerHTML = dataFromOC;
         })
 }
-    function showImage() {
+function showImage() {
       document.getElementById("demo").innerHTML = "showImage Clicked";
       data = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
       imgData = "data:image/png;base64," + data;
       // document.getElementById("imageid").src="./ykm/static/2aee70d3d005c220bc9e4c64ad8c7485.png";\
       document.getElementById("imageid").src= imgData;
+
+    }
+
+    function getAreaTop() {
+      WebViewJavascriptBridge.callHandler('getSafeAreaTop',function(dataFromOC) {
+            alert("JS 调用了 OC 注册的 colorClick 方法");
+            document.getElementById("demo").innerHTML = dataFromOC;
+        })
 
     }
 
@@ -54,7 +62,7 @@
 <body>
 <p id="demo">Hello shenzhen!</p>
 <input type="button" onClick="echo('toast clicked')" value="toast">
-<input type="button" onClick="showImage()" value="imageBTN">
+<input type="button" onClick="getAreaTop()" value="imageBTN">
 <br />
 
 <img id="imageid" border="0" src="./ykm/static/yss.jpeg" alt="Pulpit rock" width="304" height="228">
