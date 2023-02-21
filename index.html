@@ -5,18 +5,20 @@
         // console.log(str);
         // window.webkit.messageHandlers.testecho.postMessage(str);
 
-        WebViewJavascriptBridge.callHandler('colorClick',function(dataFromOC) {
+        WebViewJavascriptBridge.callHandler('getTicket',function(dataFromOC) {
             alert("JS 调用了 OC 注册的 colorClick 方法");
             // img = <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="/>
-            document.getElementById("demo").innerHTML = dataFromOC;
+            document.getElementById("demo").innerHTML = "dataFromAPP";
+    
         })
-}
-function showImage() {
-      document.getElementById("demo").innerHTML = "showImage Clicked";
-      data = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
-      imgData = "data:image/png;base64," + data;
-      // document.getElementById("imageid").src="./ykm/static/2aee70d3d005c220bc9e4c64ad8c7485.png";\
-      document.getElementById("imageid").src= imgData;
+    }
+
+    function showImage() {
+          document.getElementById("demo").innerHTML = "showImage Clicked";
+          data = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+          imgData = "data:image/png;base64," + data;
+          // document.getElementById("imageid").src="./ykm/static/2aee70d3d005c220bc9e4c64ad8c7485.png";\
+          document.getElementById("imageid").src= imgData;
 
     }
 
@@ -29,6 +31,21 @@ function showImage() {
     }
 
     function setupWebViewJavascriptBridge(callback) {
+
+          //Android使用
+      if (window.WebViewJavascriptBridge) {
+          callback(WebViewJavascriptBridge);
+      } else {
+          document.addEventListener(
+              'WebViewJavascriptBridgeReady',
+              function () {
+                  callback(WebViewJavascriptBridge)
+              },
+              false
+          );
+      }
+      
+      // iOS使用
       if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
       if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
       window.WVJBCallbacks = [callback];
@@ -60,7 +77,7 @@ function showImage() {
 
 
 <body>
-<p id="demo">Hello shenzhen!</p>
+<p id="demo">Hello shenzhennnnnnnn!</p>
 <input type="button" onClick="echo('toast clicked')" value="toast">
 <input type="button" onClick="getAreaTop()" value="imageBTN">
 <br />
