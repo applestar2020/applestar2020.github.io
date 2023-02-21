@@ -77,7 +77,7 @@
 
         function connectWebViewJavascriptBridge(callback) {
 
-                // iOS使用
+          // iOS使用
           if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
           if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
           window.WVJBCallbacks = [callback];
@@ -87,17 +87,17 @@
           document.documentElement.appendChild(WVJBIframe);
           setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
           
-            if (window.WebViewJavascriptBridge && WebViewJavascriptBridge.inited) {
-                callback(WebViewJavascriptBridge)
-            } else {
-                document.addEventListener(
-                    'WebViewJavascriptBridgeReady'
-                    , function() {
-                        callback(WebViewJavascriptBridge)
-                    },
-                    false
-                );
-            }
+            // if (window.WebViewJavascriptBridge && WebViewJavascriptBridge.inited) {
+            //     callback(WebViewJavascriptBridge)
+            // } else {
+            //     document.addEventListener(
+            //         'WebViewJavascriptBridgeReady'
+            //         , function() {
+            //             callback(WebViewJavascriptBridge)
+            //         },
+            //         false
+            //     );
+            // }
         }
 
         connectWebViewJavascriptBridge(function(bridge) {
