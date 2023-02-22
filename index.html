@@ -16,7 +16,7 @@
     </xmp>
 </p>
 <p>
-    <input type="text" id="text1" value="用户名2(username)"/>
+    <input type="text" id="text1" value="用户名3(username)"/>
 </p>
 <p>
     <input type="text" id="text2" value="password"/>
@@ -63,7 +63,7 @@
 
             //call native method
             window.WebViewJavascriptBridge.callHandler(
-                'submitFromWeb'
+                'getNLEVersion'
                 , {'param': '中文测试'}
                 , function(responseData) {
                     document.getElementById("show").innerHTML = "send get responseData from java, data = " + responseData
@@ -101,6 +101,7 @@
         }
 
         connectWebViewJavascriptBridge(function(bridge) {
+
             // bridge.init(function(message, responseCallback) {
             //     console.log('JS got a message', message);
             //     var data = {
