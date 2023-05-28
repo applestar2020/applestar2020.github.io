@@ -36,6 +36,10 @@
 
     }
 
+    function sendMsgToNative() {
+        window.webkit.messageHandlers.nativeBridge.postMessage("5.29");
+    }
+
     function setupWebViewJavascriptBridge(callback) {
 
           //Android使用
@@ -85,7 +89,7 @@
 <body>
 <p id="demo">Hello shenzhennnnnnnn!</p>
 <input type="button" onClick="echo('toast clicked')" value="toast">
-<input type="button" onClick="getAreaTop()" value="imageBTN">
+<input type="button" onClick="sendMsgToNative()" value="button">
 <br />
 
 <!-- <img id="imageid" border="0" src="./ykm/static/yss.jpeg" alt="Pulpit rock" width="304" height="228">
